@@ -42,3 +42,7 @@ The first adapter targets Kubernetes Jobs. Later adapters can target Kueue, Volc
 6. GPU inventory
 7. scheduler policy plug-ins
 8. benchmark workloads and dashboards
+
+## Scaffold checkpoint
+
+Implemented locally: resource/workload records, quota check, state transitions, scheduler protocol, in-memory adapter, and a submission service. The delivery-order items that require external systems remain future work.

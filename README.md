@@ -67,3 +67,7 @@ See [IMPLEMENTATION.md](IMPLEMENTATION.md).
 ## License
 
 MIT
+
+## Available now
+
+The local in-process path has a typed workload model, quota validation, lifecycle transitions, and an async scheduler adapter. Run `PYTHONPATH=src python -m unittest discover -s tests`. HTTP, Kubernetes, persistence, and metrics exporters remain planned.
