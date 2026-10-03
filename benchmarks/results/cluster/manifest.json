@@ -1,0 +1,127 @@
+{
+  "cluster": {
+    "configs": [
+      {
+        "mode": "pinned",
+        "target_longest_s": 60.0,
+        "time_scale": 120.0
+      },
+      {
+        "mode": "delegate",
+        "target_longest_s": 60.0,
+        "time_scale": 120.0
+      }
+    ],
+    "container_runtime": "containerd://2.3.4",
+    "docker": "28.2.2",
+    "kind": "kind v0.33.0 go1.26.7 windows/amd64",
+    "kubernetes": "v1.37.0",
+    "longest_runtime_s": 7200.0,
+    "node_os": "Debian GNU/Linux 13 (trixie)",
+    "repetitions": 3,
+    "trace_seed": 1
+  },
+  "commit": "3b6e03b",
+  "config": {
+    "e1_bug_seeds": [
+      1,
+      200
+    ],
+    "e2": {
+      "cluster": "reference-e2.json",
+      "jobs": 40,
+      "load": 0.8,
+      "policy": "fifo+first_fit",
+      "variant": "balanced"
+    },
+    "e3": {
+      "cluster": "reference.json",
+      "jobs": 300,
+      "loads": {
+        "full": [
+          0.8,
+          1.0
+        ],
+        "quick": [
+          0.8
+        ]
+      },
+      "policies": [
+        "fifo+first_fit",
+        "priority+best_fit",
+        "quota+first_fit",
+        "stub"
+      ],
+      "variants": {
+        "full": [
+          "balanced",
+          "skew",
+          "bursty"
+        ],
+        "quick": [
+          "balanced"
+        ]
+      }
+    },
+    "seeds": {
+      "e1": {
+        "full": [
+          1,
+          2000
+        ],
+        "quick": [
+          1,
+          100
+        ]
+      },
+      "e2": {
+        "full": [
+          1,
+          10
+        ],
+        "quick": [
+          1,
+          3
+        ]
+      },
+      "e3": {
+        "full": [
+          101,
+          110
+        ],
+        "quick": [
+          101,
+          103
+        ]
+      }
+    },
+    "suite": "cluster"
+  },
+  "config_hash": "db59c10e778bdb62",
+  "dirty": true,
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i9-14900KF",
+    "logical_cpus": 32,
+    "os": "Windows-11",
+    "ram_gb": 96
+  },
+  "load_note": "1 other agent run active (agent-runtime); 1 worker (sequential runs); CPU load sampled before the run 59.8 % (5 samples, 2 s apart, 07:53)",
+  "simulated": true,
+  "suite": "cluster",
+  "versions": {
+    "ai-workload-platform": "0.2.0",
+    "fastapi": "0.142.2",
+    "httpx": "0.28.1",
+    "kubernetes": "36.0.3",
+    "matplotlib": "3.9.2",
+    "numpy": "1.26.4",
+    "prometheus-client": "0.26.0",
+    "psycopg": "3.3.6",
+    "pydantic": "2.13.5",
+    "python": "3.12.3",
+    "scipy": "1.13.1",
+    "uvicorn": "0.54.0"
+  },
+  "wall_s": 641.3,
+  "workers": 1
+}

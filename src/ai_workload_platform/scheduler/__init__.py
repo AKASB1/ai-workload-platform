@@ -1,25 +1,33 @@
-"""Scheduler boundary and deterministic local adapter."""
-from typing import Protocol
-from ai_workload_platform.models import Workload, WorkloadState
+"""Backend contract. The backend executes and observes; it knows nothing about queues, quotas,
+retries, or policies. The platform talks to it only through `SchedulerAdapter` (docs/contracts.md §7).
+"""
 
+from __future__ import annotations
+
+from typing import Protocol, runtime_checkable
+
+from ai_workload_platform.models import AttemptRequest, BackendError, NodeInfo, Snapshot
+
+
+@runtime_checkable
 class SchedulerAdapter(Protocol):
-    async def submit(self, workload: Workload) -> None: ...
-    async def cancel(self, workload_id: str) -> None: ...
-    async def status(self, workload_id: str) -> WorkloadState: ...
+    def inventory(self) -> list[NodeInfo]:
+        """The nodes with name, rack, class, speed, total GPUs, CPUs, memory (MB), and readiness."""
 
-class LocalScheduler:
-    def __init__(self) -> None:
-        self.jobs: dict[str, WorkloadState] = {}
+    def start(self, attempt: AttemptRequest) -> None:
+        """Begin the attempt. Idempotent on the attempt id."""
 
-    async def submit(self, workload: Workload) -> None:
-        if workload.id in self.jobs:
-            raise ValueError("duplicate workload id")
-        self.jobs[workload.id] = WorkloadState.RUNNING
+    def stop(self, attempt_id: str) -> None:
+        """Ask the attempt to end. Idempotent; unknown or ended attempts are not an error."""
 
-    async def cancel(self, workload_id: str) -> None:
-        if workload_id not in self.jobs:
-            raise KeyError(workload_id)
-        self.jobs[workload_id] = WorkloadState.CANCELLED
+    def observe(self) -> Snapshot:
+        """Every attempt the backend knows, ended ones included until forgotten. Complete or an error."""
 
-    async def status(self, workload_id: str) -> WorkloadState:
-        return self.jobs[workload_id]
+    def forget(self, attempt_id: str) -> None:
+        """The platform recorded the terminal state; release what is kept for the attempt."""
+
+    def next_event_ms(self) -> int | None:
+        """Virtual-time backends: the time of their next internal event (None: nothing scheduled)."""
+
+
+__all__ = ["BackendError", "SchedulerAdapter"]

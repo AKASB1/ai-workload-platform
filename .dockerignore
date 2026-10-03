@@ -1,0 +1,12 @@
+.git
+.venv
+venv
+outputs
+logs
+tmp
+benchmarks
+docs
+tests
+**/__pycache__
+*.local.md
+.claude

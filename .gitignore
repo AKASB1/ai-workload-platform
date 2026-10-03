@@ -20,3 +20,9 @@ outputs/
 .DS_Store
 .idea/
 .vscode/
+
+# Private planning notes
+*.local.md
+
+# Claude Code
+.claude/

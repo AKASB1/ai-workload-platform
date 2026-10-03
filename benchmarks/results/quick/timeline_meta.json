@@ -1,0 +1,86 @@
+{
+  "faults": [
+    {
+      "at_ms": 40000,
+      "end_ms": null,
+      "kind": "crash",
+      "params": {
+        "point": "start.after_commit"
+      }
+    },
+    {
+      "at_ms": 70000,
+      "end_ms": 110000,
+      "kind": "node_down",
+      "params": {
+        "node": "r0-n01"
+      }
+    }
+  ],
+  "note": "simulated, virtual clock, local backend",
+  "outcome": {
+    "attempts_by_reason": {
+      "node_lost": 1,
+      "succeeded": 8
+    },
+    "backend": "local",
+    "bug": "none",
+    "converge_ms": 132000,
+    "crash_points_hit": {
+      "start.after_commit": 1
+    },
+    "end_ms": 242000,
+    "events": 37,
+    "fault_log": [
+      {
+        "at_ms": 40000,
+        "kind": "crash",
+        "params": {
+          "point": "start.after_commit"
+        },
+        "phase": "start"
+      },
+      {
+        "at_ms": 70000,
+        "kind": "node_down",
+        "params": {
+          "node": "r0-n01"
+        },
+        "phase": "start"
+      },
+      {
+        "at_ms": 110000,
+        "kind": "node_down",
+        "params": {
+          "node": "r0-n01"
+        },
+        "phase": "end"
+      }
+    ],
+    "faults_injected": {
+      "crash": 1,
+      "node_down": 1
+    },
+    "last_fault_ms": 110000,
+    "policy": "fifo+first_fit",
+    "seed": 0,
+    "terminal_states": {
+      "SUCCEEDED": 8
+    },
+    "ticks": 41,
+    "violations": [],
+    "wall_s": 0.032,
+    "workloads": 8
+  },
+  "thresholds": {
+    "lease_ttl_ms": 5000,
+    "lost_grace_ms": 6000,
+    "node_grace_ms": 5000,
+    "observe_interval_ms": 1000,
+    "policy_max_failures": 3,
+    "policy_timeout_s": 60.0,
+    "start_retry_ms": 2000,
+    "start_timeout_ms": 20000,
+    "stop_retry_ms": 3000
+  }
+}

@@ -1,0 +1,40 @@
+# docker compose up: PostgreSQL + the platform with the local backend on a scaled clock (simulated GPUs).
+name: awp
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: awp
+      POSTGRES_PASSWORD: awp
+      POSTGRES_DB: awp
+    ports:
+      - "127.0.0.1:${AWP_PG_PORT:-18432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U awp -d awp"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    labels:
+      cvproject: ai-workload-platform
+  platform:
+    build: .
+    image: ai-workload-platform:dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AWP_PG_DSN: postgresql://awp:awp@postgres:5432/awp
+    command: ["up", "--host", "0.0.0.0", "--port", "18400", "--backend", "local", "--scale", "${AWP_SCALE:-60}"]
+    ports:
+      - "127.0.0.1:${AWP_PORT:-18400}:18400"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:18400/healthz')"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    labels:
+      cvproject: ai-workload-platform
+networks:
+  default:
+    labels:
+      cvproject: ai-workload-platform

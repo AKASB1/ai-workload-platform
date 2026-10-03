@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: awp-config
+  namespace: awp-system
+data:
+  cluster.json: |
+    {
+      "schema_version": 1,
+      "name": "kind",
+      "classes": [
+        {
+          "name": "a100",
+          "speed": 1.0
+        }
+      ],
+      "node_groups": [],
+      "nodes": [
+        {
+          "name": "cvproject-awp-worker",
+          "rack": "r0",
+          "class": "a100",
+          "gpus": 8,
+          "cpus": 128,
+          "mem_gb": 1024
+        },
+        {
+          "name": "cvproject-awp-worker2",
+          "rack": "r0",
+          "class": "a100",
+          "gpus": 8,
+          "cpus": 128,
+          "mem_gb": 1024
+        },
+        {
+          "name": "cvproject-awp-worker3",
+          "rack": "r1",
+          "class": "a100",
+          "gpus": 8,
+          "cpus": 128,
+          "mem_gb": 1024
+        },
+        {
+          "name": "cvproject-awp-worker4",
+          "rack": "r1",
+          "class": "a100",
+          "gpus": 8,
+          "cpus": 128,
+          "mem_gb": 1024
+        }
+      ],
+      "cross_node_factor": 1.0,
+      "cross_rack_factor": 1.0,
+      "restart_overhead_s": 120,
+      "preempt_grace_s": 0,
+      "sources": {
+        "node": "the kind workers of deploy/kind/cluster.yaml; 8 advertised GPUs each (scripts/kind_setup.py); CPUs and memory are the reference shape, not the host's",
+        "factors": "1.0: a real cluster has no topology penalty to match"
+      }
+    }

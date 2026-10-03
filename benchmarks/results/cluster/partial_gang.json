@@ -1,0 +1,112 @@
+{
+  "note": "simulated GPUs on a local kind cluster; delegate mode; wall-clock seconds on a shared machine; one run",
+  "thresholds_ms": {
+    "start_timeout_ms": 30000
+  },
+  "other_tenant_nodes": [
+    "cvproject-awp-worker",
+    "cvproject-awp-worker2",
+    "cvproject-awp-worker3"
+  ],
+  "marks_s": {
+    "started": 0.5,
+    "one_worker_running": 1.0,
+    "stop_requested": 30.0,
+    "other_tenant_deleted": 30.1,
+    "attempt_ended": 33.1,
+    "retry_running": 39.1,
+    "terminal": 102.1
+  },
+  "pods": {
+    "first_attempt": [
+      {
+        "pod": "gang-a1-0-0-n4gvw",
+        "node": "cvproject-awp-worker4",
+        "phase": "Running"
+      },
+      {
+        "pod": "gang-a1-1-0-bzgmz",
+        "node": null,
+        "phase": "Pending"
+      }
+    ],
+    "retry": [
+      {
+        "pod": "gang-a2-0-0-2zcws",
+        "node": "cvproject-awp-worker2",
+        "phase": "Running"
+      },
+      {
+        "pod": "gang-a2-1-0-x4vn5",
+        "node": "cvproject-awp-worker4",
+        "phase": "Running"
+      }
+    ]
+  },
+  "final_state": "SUCCEEDED",
+  "first_attempt": {
+    "end_reason": "start_timeout",
+    "stop_reason": "start_timeout",
+    "counted": true,
+    "placement_by_policy": [
+      {
+        "node": "cvproject-awp-worker",
+        "workers": 1
+      },
+      {
+        "node": "cvproject-awp-worker2",
+        "workers": 1
+      }
+    ]
+  },
+  "events": [
+    {
+      "t_s": 0.0,
+      "type": "submitted",
+      "reason": null,
+      "state": "QUEUED"
+    },
+    {
+      "t_s": 0.0,
+      "type": "started",
+      "reason": null,
+      "state": "STARTING"
+    },
+    {
+      "t_s": 30.0,
+      "type": "stop_requested",
+      "reason": "start_timeout",
+      "state": "STARTING"
+    },
+    {
+      "t_s": 33.1,
+      "type": "attempt_ended",
+      "reason": "start_timeout",
+      "state": "RETRY_WAIT"
+    },
+    {
+      "t_s": 38.1,
+      "type": "requeued",
+      "reason": null,
+      "state": "QUEUED"
+    },
+    {
+      "t_s": 38.1,
+      "type": "started",
+      "reason": null,
+      "state": "STARTING"
+    },
+    {
+      "t_s": 39.1,
+      "type": "running",
+      "reason": null,
+      "state": "RUNNING"
+    },
+    {
+      "t_s": 101.6,
+      "type": "attempt_ended",
+      "reason": "succeeded",
+      "state": "SUCCEEDED"
+    }
+  ]
+}

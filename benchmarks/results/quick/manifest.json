@@ -1,0 +1,110 @@
+{
+  "commit": "530d8ef",
+  "config": {
+    "e1_bug_seeds": [
+      1,
+      200
+    ],
+    "e2": {
+      "cluster": "reference-e2.json",
+      "jobs": 40,
+      "load": 0.8,
+      "policy": "fifo+first_fit",
+      "variant": "balanced"
+    },
+    "e3": {
+      "cluster": "reference.json",
+      "jobs": 300,
+      "loads": {
+        "full": [
+          0.8,
+          1.0
+        ],
+        "quick": [
+          0.8
+        ]
+      },
+      "policies": [
+        "fifo+first_fit",
+        "priority+best_fit",
+        "quota+first_fit",
+        "stub"
+      ],
+      "variants": {
+        "full": [
+          "balanced",
+          "skew",
+          "bursty"
+        ],
+        "quick": [
+          "balanced"
+        ]
+      }
+    },
+    "seeds": {
+      "e1": {
+        "full": [
+          1,
+          2000
+        ],
+        "quick": [
+          1,
+          100
+        ]
+      },
+      "e2": {
+        "full": [
+          1,
+          10
+        ],
+        "quick": [
+          1,
+          3
+        ]
+      },
+      "e3": {
+        "full": [
+          101,
+          110
+        ],
+        "quick": [
+          101,
+          103
+        ]
+      }
+    },
+    "suite": "quick"
+  },
+  "config_hash": "2db9b1b692a4869c",
+  "dirty": true,
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i9-14900KF",
+    "logical_cpus": 32,
+    "os": "Windows-11",
+    "ram_gb": 96
+  },
+  "load_note": "not recorded",
+  "simulated": true,
+  "suite": "quick",
+  "versions": {
+    "ai-workload-platform": "0.2.0",
+    "fastapi": "0.142.2",
+    "httpx": "0.28.1",
+    "kubernetes": "36.0.3",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.3",
+    "prometheus-client": "0.26.0",
+    "psycopg": "3.3.6",
+    "pydantic": "2.13.5",
+    "python": "3.12.3",
+    "scipy": "1.18.1",
+    "uvicorn": "0.54.0"
+  },
+  "wall_s": 65.1,
+  "wall_s_by_experiment": {
+    "e1": 42.0,
+    "e2": 1.5,
+    "e3": 14.8
+  },
+  "workers": 4
+}

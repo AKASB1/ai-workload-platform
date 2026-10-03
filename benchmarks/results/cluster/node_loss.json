@@ -1,0 +1,87 @@
+{
+  "note": "simulated GPUs on a local kind cluster; wall-clock seconds on a shared machine; one run",
+  "node": "cvproject-awp-worker4",
+  "workload": "nl3",
+  "thresholds_ms": {
+    "node_grace_ms": 30000,
+    "lost_grace_ms": 30000
+  },
+  "marks_s": {
+    "running": 2.6,
+    "container_stopped": 3.7,
+    "node_not_ready_in_inventory": 49.9,
+    "stop_requested_node_lost": 80.1,
+    "container_started": 80.5,
+    "attempt_ended": 85.5,
+    "retry_running": 91.5
+  },
+  "first_attempt": {
+    "end_reason": "node_lost",
+    "stop_reason": "node_lost",
+    "counted": true,
+    "placement": [
+      {
+        "node": "cvproject-awp-worker4",
+        "workers": 1
+      }
+    ]
+  },
+  "retry_attempt": {
+    "placement": [
+      {
+        "node": "cvproject-awp-worker4",
+        "workers": 1
+      }
+    ]
+  },
+  "events": [
+    {
+      "t_s": 0.0,
+      "type": "submitted",
+      "reason": null,
+      "state": "QUEUED"
+    },
+    {
+      "t_s": 1.0,
+      "type": "started",
+      "reason": null,
+      "state": "STARTING"
+    },
+    {
+      "t_s": 2.0,
+      "type": "running",
+      "reason": null,
+      "state": "RUNNING"
+    },
+    {
+      "t_s": 79.4,
+      "type": "stop_requested",
+      "reason": "node_lost",
+      "state": "RUNNING"
+    },
+    {
+      "t_s": 84.5,
+      "type": "attempt_ended",
+      "reason": "node_lost",
+      "state": "RETRY_WAIT"
+    },
+    {
+      "t_s": 89.5,
+      "type": "requeued",
+      "reason": null,
+      "state": "QUEUED"
+    },
+    {
+      "t_s": 89.5,
+      "type": "started",
+      "reason": null,
+      "state": "STARTING"
+    },
+    {
+      "t_s": 90.5,
+      "type": "running",
+      "reason": null,
+      "state": "RUNNING"
+    }
+  ]
+}

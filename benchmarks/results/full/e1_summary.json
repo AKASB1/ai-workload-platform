@@ -1,0 +1,152 @@
+{
+  "kube-fake": {
+    "bugs": {
+      "no_epoch_check": {
+        "caught": 1,
+        "first_seed": 126,
+        "invariants": {
+          "I5": 1
+        },
+        "schedules": 200,
+        "schedules_until_caught": 126
+      },
+      "no_lost_grace": {
+        "caught": 4,
+        "first_seed": 30,
+        "invariants": {
+          "I3": 4
+        },
+        "schedules": 200,
+        "schedules_until_caught": 30
+      },
+      "no_version_check": {
+        "caught": 27,
+        "first_seed": 6,
+        "invariants": {
+          "I5": 27
+        },
+        "schedules": 200,
+        "schedules_until_caught": 6
+      },
+      "release_at_stop": {
+        "caught": 178,
+        "first_seed": 1,
+        "invariants": {
+          "I4": 1,
+          "I5": 177
+        },
+        "schedules": 200,
+        "schedules_until_caught": 1
+      }
+    },
+    "converge_s_max": 398.296,
+    "converge_s_p50": 115.709,
+    "converge_s_p95": 211.773,
+    "converged": 2000,
+    "crash_points_hit": {
+      "ended.before_forget": 161,
+      "requeue.before_commit": 111,
+      "start.after_call": 135,
+      "start.after_commit": 122,
+      "stop.before_call": 84,
+      "stopped.before_commit": 88,
+      "submit.after_commit": 96
+    },
+    "events": 314509,
+    "faults_injected": {
+      "api_errors": 351,
+      "cap_change": 352,
+      "crash": 797,
+      "job_pending": 378,
+      "node_down": 361,
+      "observe_down": 376,
+      "observe_stale": 724,
+      "pod_evicted": 391,
+      "policy_fault": 340,
+      "preempt": 340,
+      "race_cancel": 700,
+      "store_outage": 363,
+      "store_tx_fail": 366,
+      "zombie": 641
+    },
+    "schedules": 2000,
+    "violating_schedules": 0,
+    "wall_s_sum": 818.78
+  },
+  "local": {
+    "bugs": {
+      "no_epoch_check": {
+        "caught": 3,
+        "first_seed": 3,
+        "invariants": {
+          "I5": 3
+        },
+        "schedules": 200,
+        "schedules_until_caught": 3
+      },
+      "no_lost_grace": {
+        "caught": 12,
+        "first_seed": 32,
+        "invariants": {
+          "I3": 12
+        },
+        "schedules": 200,
+        "schedules_until_caught": 32
+      },
+      "no_version_check": {
+        "caught": 29,
+        "first_seed": 6,
+        "invariants": {
+          "I5": 29
+        },
+        "schedules": 200,
+        "schedules_until_caught": 6
+      },
+      "release_at_stop": {
+        "caught": 176,
+        "first_seed": 1,
+        "invariants": {
+          "I4": 1,
+          "I5": 175
+        },
+        "schedules": 200,
+        "schedules_until_caught": 1
+      }
+    },
+    "converge_s_max": 494.116,
+    "converge_s_p50": 124.274,
+    "converge_s_p95": 261.299,
+    "converged": 2000,
+    "crash_points_hit": {
+      "ended.before_forget": 147,
+      "requeue.before_commit": 108,
+      "start.after_call": 123,
+      "start.after_commit": 109,
+      "stop.before_call": 80,
+      "stopped.before_commit": 78,
+      "submit.after_commit": 90
+    },
+    "events": 315662,
+    "faults_injected": {
+      "attempt_crash": 334,
+      "attempt_lost": 343,
+      "cap_change": 329,
+      "crash": 735,
+      "node_down": 342,
+      "observe_down": 342,
+      "observe_stale": 690,
+      "policy_fault": 294,
+      "preempt": 301,
+      "race_cancel": 626,
+      "slow_start": 299,
+      "start_fail": 347,
+      "stop_fail": 327,
+      "store_outage": 332,
+      "store_tx_fail": 334,
+      "zombie": 564
+    },
+    "schedules": 2000,
+    "violating_schedules": 0,
+    "wall_s_sum": 438.46
+  }
+}
