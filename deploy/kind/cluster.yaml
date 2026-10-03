@@ -1,0 +1,14 @@
+# Local kind cluster for the real-cluster experiments (simulated GPUs: the workers advertise
+# nvidia.com/gpu through a node status patch, see scripts/kind_setup.py).
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: cvproject-awp
+networking:
+  apiServerAddress: "127.0.0.1"
+  apiServerPort: 18443
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+  - role: worker
+  - role: worker

@@ -1,0 +1,83 @@
+# The platform inside the cluster (Tier 2 item 2): one controller + API, Kubernetes backend, in-cluster config.
+# SQLite on an emptyDir is for the demonstration only; a durable deployment points AWP_PG_DSN at PostgreSQL.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: awp-platform
+  namespace: awp-system
+  labels:
+    app.kubernetes.io/name: ai-workload-platform
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ai-workload-platform
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ai-workload-platform
+    spec:
+      serviceAccountName: awp-controller
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+      containers:
+        - name: platform
+          image: ai-workload-platform:dev
+          imagePullPolicy: IfNotPresent
+          args: ["up", "--host", "0.0.0.0", "--port", "18400", "--backend", "kube", "--in-cluster",
+                 "--cluster", "/etc/awp/cluster.json", "--db", "/data/awp.db", "--time-scale", "60"]
+          ports:
+            - name: http
+              containerPort: 18400
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 10
+            failureThreshold: 6
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: config
+              mountPath: /etc/awp
+            - name: data
+              mountPath: /data
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: config
+          configMap:
+            name: awp-config
+        - name: data
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: awp-platform
+  namespace: awp-system
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: ai-workload-platform
+  ports:
+    - name: http
+      port: 18400
+      targetPort: http

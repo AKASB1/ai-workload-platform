@@ -1,0 +1,73 @@
+{
+  "kube-fake": {
+    "converge_s_max": 313.702,
+    "converge_s_p50": 118.629,
+    "converge_s_p95": 194.626,
+    "converged": 100,
+    "crash_points_hit": {
+      "ended.before_forget": 12,
+      "requeue.before_commit": 5,
+      "start.after_call": 2,
+      "start.after_commit": 7,
+      "stop.before_call": 3,
+      "stopped.before_commit": 1,
+      "submit.after_commit": 7
+    },
+    "events": 15637,
+    "faults_injected": {
+      "api_errors": 15,
+      "cap_change": 10,
+      "crash": 37,
+      "job_pending": 19,
+      "node_down": 20,
+      "observe_down": 12,
+      "observe_stale": 29,
+      "pod_evicted": 24,
+      "policy_fault": 15,
+      "preempt": 12,
+      "race_cancel": 40,
+      "store_outage": 20,
+      "store_tx_fail": 15,
+      "zombie": 29
+    },
+    "schedules": 100,
+    "violating_schedules": 0,
+    "wall_s_sum": 97.45
+  },
+  "local": {
+    "converge_s_max": 357.767,
+    "converge_s_p50": 134.495,
+    "converge_s_p95": 263.568,
+    "converged": 100,
+    "crash_points_hit": {
+      "ended.before_forget": 9,
+      "requeue.before_commit": 2,
+      "start.after_call": 2,
+      "start.after_commit": 3,
+      "stop.before_call": 3,
+      "submit.after_commit": 7
+    },
+    "events": 16924,
+    "faults_injected": {
+      "attempt_crash": 19,
+      "attempt_lost": 23,
+      "cap_change": 11,
+      "crash": 26,
+      "node_down": 16,
+      "observe_down": 15,
+      "observe_stale": 26,
+      "policy_fault": 20,
+      "preempt": 9,
+      "race_cancel": 34,
+      "slow_start": 8,
+      "start_fail": 16,
+      "stop_fail": 17,
+      "store_outage": 21,
+      "store_tx_fail": 12,
+      "zombie": 32
+    },
+    "schedules": 100,
+    "violating_schedules": 0,
+    "wall_s_sum": 47.9
+  }
+}

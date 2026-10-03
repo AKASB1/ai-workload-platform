@@ -1,0 +1,10 @@
+seed,jobs,policy_07,platform_policy,jobs_compared,start_differences,end_differences,placement_differences,policy_failures,first_difference
+1,200,fifo+first_fit+none,external:fifo+first_fit+none,200,0,0,0,0,
+1,200,fifo+first_fit+none,builtin:fifo+first_fit,200,0,0,0,0,
+1,200,fifo+first_fit+easy,external:fifo+first_fit+easy,200,0,0,0,0,
+2,200,fifo+first_fit+none,external:fifo+first_fit+none,200,0,0,0,0,
+2,200,fifo+first_fit+none,builtin:fifo+first_fit,200,0,0,0,0,
+2,200,fifo+first_fit+easy,external:fifo+first_fit+easy,200,0,0,0,0,
+3,200,fifo+first_fit+none,external:fifo+first_fit+none,200,0,0,0,0,
+3,200,fifo+first_fit+none,builtin:fifo+first_fit,200,0,0,0,0,
+3,200,fifo+first_fit+easy,external:fifo+first_fit+easy,200,0,0,0,0,

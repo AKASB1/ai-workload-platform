@@ -1,0 +1,201 @@
+backend,bug,seed,violations,invariant,message,faults,crash_points,converge_ms,events,ticks,workloads,wall_s
+kube-fake,none,1,0,,,"{""preempt"": 1, ""race_cancel"": 1, ""store_tx_fail"": 1}",{},41938,188,186,32,1.126
+kube-fake,none,2,0,,,"{""job_pending"": 1, ""policy_fault"": 2, ""zombie"": 1}",{},88182,138,140,29,0.8838
+kube-fake,none,3,0,,,"{""node_down"": 1, ""observe_stale"": 1, ""store_outage"": 1, ""zombie"": 2}",{},175553,244,224,47,1.575
+kube-fake,none,4,0,,,"{""job_pending"": 1, ""pod_evicted"": 1}",{},120675,174,201,35,1.2082
+kube-fake,none,5,0,,,"{""api_errors"": 1, ""crash"": 1}","{""submit.after_commit"": 1}",192541,106,127,23,0.3754
+kube-fake,none,6,0,,,"{""cap_change"": 1, ""policy_fault"": 2, ""race_cancel"": 1}",{},161723,94,113,20,0.303
+kube-fake,none,7,0,,,"{""race_cancel"": 1}",{},116102,121,146,24,0.5364
+kube-fake,none,8,0,,,"{""crash"": 3, ""observe_down"": 1, ""store_outage"": 1}","{""requeue.before_commit"": 1, ""stop.before_call"": 1, ""submit.after_commit"": 1}",116491,130,154,26,0.6723
+kube-fake,none,9,0,,,"{""cap_change"": 1, ""observe_down"": 1, ""observe_stale"": 1, ""race_cancel"": 1, ""store_outage"": 1}",{},43957,109,134,21,0.4831
+kube-fake,none,10,0,,,"{""crash"": 1, ""policy_fault"": 1, ""zombie"": 1}","{""start.after_commit"": 1}",8147,120,140,27,0.4911
+kube-fake,none,11,0,,,"{""cap_change"": 1, ""node_down"": 1, ""pod_evicted"": 1, ""race_cancel"": 1}",{},54289,146,172,31,0.759
+kube-fake,none,12,0,,,"{""api_errors"": 1}",{},104150,196,210,40,1.141
+kube-fake,none,13,0,,,"{""crash"": 1, ""pod_evicted"": 1, ""race_cancel"": 1}","{""ended.before_forget"": 1}",313702,198,221,37,1.0979
+kube-fake,none,14,0,,,"{""observe_stale"": 1, ""policy_fault"": 1}",{},47028,148,173,28,0.6017
+kube-fake,none,15,0,,,"{""api_errors"": 1, ""job_pending"": 1}",{},89817,172,204,38,1.0002
+kube-fake,none,16,0,,,"{""race_cancel"": 1}",{},93717,92,102,23,0.2952
+kube-fake,none,17,0,,,"{""cap_change"": 1, ""store_tx_fail"": 1, ""zombie"": 2}",{},81070,158,151,34,0.8685
+kube-fake,none,18,0,,,"{""observe_down"": 1, ""zombie"": 3}",{},61050,150,144,35,0.4835
+kube-fake,none,19,0,,,"{""api_errors"": 1}",{},76050,96,112,20,0.4693
+kube-fake,none,20,0,,,"{""crash"": 1, ""store_outage"": 1}","{""ended.before_forget"": 1}",71070,126,145,21,0.5529
+kube-fake,none,21,0,,,"{""api_errors"": 1, ""node_down"": 1, ""observe_stale"": 1}",{},183204,203,239,39,0.6916
+kube-fake,none,22,0,,,"{""api_errors"": 1, ""observe_stale"": 1, ""policy_fault"": 1}",{},119835,140,162,28,0.625
+kube-fake,none,23,0,,,"{""crash"": 1, ""policy_fault"": 1, ""race_cancel"": 1}","{""ended.before_forget"": 1}",956,142,158,27,0.8107
+kube-fake,none,24,0,,,"{""observe_stale"": 1, ""race_cancel"": 1}",{},158587,206,227,40,1.4156
+kube-fake,none,25,0,,,"{""pod_evicted"": 1, ""store_outage"": 1, ""zombie"": 1}",{},21611,204,195,36,1.1356
+kube-fake,none,26,0,,,"{""observe_down"": 1}",{},144119,188,205,33,1.0271
+kube-fake,none,27,0,,,"{""store_tx_fail"": 1}",{},141146,182,210,36,0.9904
+kube-fake,none,28,0,,,"{""api_errors"": 1}",{},35051,136,150,27,0.573
+kube-fake,none,29,0,,,"{""race_cancel"": 1}",{},112635,136,147,26,0.5548
+kube-fake,none,30,0,,,"{""observe_stale"": 2, ""race_cancel"": 1}",{},94405,128,140,26,0.5827
+kube-fake,none,31,0,,,"{""pod_evicted"": 1, ""store_outage"": 1, ""store_tx_fail"": 1}",{},72058,108,140,22,0.3672
+kube-fake,none,32,0,,,"{""job_pending"": 1, ""node_down"": 1, ""race_cancel"": 2, ""zombie"": 1}",{},163679,220,234,40,1.3796
+kube-fake,none,33,0,,,"{""observe_down"": 1, ""policy_fault"": 1, ""preempt"": 1, ""race_cancel"": 1, ""store_tx_fail"": 1}",{},155761,138,159,25,0.6937
+kube-fake,none,34,0,,,"{""crash"": 1, ""observe_down"": 1, ""observe_stale"": 1, ""zombie"": 1}","{""requeue.before_commit"": 1}",113978,122,12938,26,21.7318
+kube-fake,none,35,0,,,"{""store_tx_fail"": 1, ""zombie"": 1}",{},151146,241,237,39,0.4581
+kube-fake,none,36,0,,,"{""cap_change"": 1, ""job_pending"": 1, ""observe_stale"": 2, ""store_outage"": 1, ""zombie"": 1}",{},76515,112,142,24,0.1533
+kube-fake,none,37,0,,,"{""policy_fault"": 3, ""preempt"": 1, ""zombie"": 1}",{},69589,198,203,35,1.1875
+kube-fake,none,38,0,,,"{""crash"": 1, ""race_cancel"": 1, ""store_outage"": 1}","{""submit.after_commit"": 1}",111532,112,141,25,0.371
+kube-fake,none,39,0,,,"{""node_down"": 1, ""observe_down"": 1, ""observe_stale"": 2, ""race_cancel"": 1, ""zombie"": 1}",{},117256,249,244,40,1.7697
+kube-fake,none,40,0,,,"{""job_pending"": 1}",{},154849,116,123,24,0.3935
+kube-fake,none,41,0,,,"{""store_tx_fail"": 1}",{},188873,152,174,33,0.8154
+kube-fake,none,42,0,,,"{""cap_change"": 1, ""observe_stale"": 2, ""pod_evicted"": 1, ""preempt"": 1, ""race_cancel"": 1}",{},0,140,169,30,0.6603
+kube-fake,none,43,0,,,"{""api_errors"": 1, ""crash"": 1, ""job_pending"": 1, ""observe_down"": 1, ""zombie"": 1}","{""start.after_commit"": 1}",57723,158,166,32,0.563
+kube-fake,none,44,0,,,"{""job_pending"": 1, ""observe_stale"": 1, ""pod_evicted"": 1, ""store_outage"": 1, ""store_tx_fail"": 1}",{},74175,194,237,37,1.3771
+kube-fake,none,45,0,,,"{""cap_change"": 1, ""crash"": 1}","{""ended.before_forget"": 1}",142298,174,156,38,0.6509
+kube-fake,none,46,0,,,"{""node_down"": 1, ""store_tx_fail"": 1}",{},0,107,135,21,0.3093
+kube-fake,none,47,0,,,"{""crash"": 1, ""node_down"": 1}","{""start.after_commit"": 1}",190101,119,137,24,0.5747
+kube-fake,none,48,0,,,"{""observe_down"": 1, ""observe_stale"": 1, ""preempt"": 1}",{},120109,188,219,35,1.8734
+kube-fake,none,49,0,,,"{""crash"": 1, ""node_down"": 1, ""pod_evicted"": 1}","{""start.after_commit"": 1}",139840,119,149,20,0.6791
+kube-fake,none,50,0,,,"{""cap_change"": 1, ""crash"": 1, ""pod_evicted"": 1, ""store_tx_fail"": 1}","{""submit.after_commit"": 1}",70053,136,158,26,0.6592
+kube-fake,none,51,0,,,"{""preempt"": 1}",{},121736,204,207,33,1.3028
+kube-fake,none,52,0,,,"{""pod_evicted"": 1}",{},127718,220,226,40,0.9981
+kube-fake,none,53,0,,,"{""api_errors"": 1, ""observe_stale"": 1}",{},73806,183,196,34,0.8644
+kube-fake,none,54,0,,,"{""node_down"": 2, ""race_cancel"": 3, ""store_outage"": 1}",{},71637,113,147,23,0.5197
+kube-fake,none,55,0,,,"{""node_down"": 1, ""race_cancel"": 1}",{},137041,97,126,22,0.2421
+kube-fake,none,56,0,,,"{""api_errors"": 1, ""job_pending"": 1, ""pod_evicted"": 1}",{},169226,188,210,38,1.0871
+kube-fake,none,57,0,,,"{""observe_stale"": 1, ""pod_evicted"": 1, ""store_outage"": 1}",{},166793,208,256,38,1.2827
+kube-fake,none,58,0,,,"{""node_down"": 1}",{},116493,179,203,35,0.8893
+kube-fake,none,59,0,,,"{""crash"": 1, ""job_pending"": 1}","{""requeue.before_commit"": 1}",180262,148,174,27,0.9108
+kube-fake,none,60,0,,,"{""api_errors"": 1, ""crash"": 1, ""race_cancel"": 1}","{""start.after_call"": 1}",118629,123,145,28,0.5546
+kube-fake,none,61,0,,,"{""race_cancel"": 1}",{},134432,178,209,34,0.8687
+kube-fake,none,62,0,,,"{""crash"": 1, ""observe_down"": 1, ""store_outage"": 1}","{""submit.after_commit"": 1}",194626,140,169,27,0.6901
+kube-fake,none,63,0,,,"{""node_down"": 1}",{},81731,116,130,24,0.3651
+kube-fake,none,64,0,,,"{""observe_stale"": 1, ""preempt"": 1}",{},141446,198,216,32,1.1584
+kube-fake,none,65,0,,,"{""zombie"": 1}",{},135875,142,155,30,0.6146
+kube-fake,none,66,0,,,{},{},66117,174,192,33,1.0403
+kube-fake,none,67,0,,,"{""crash"": 2, ""node_down"": 2, ""pod_evicted"": 1}","{""ended.before_forget"": 1, ""start.after_call"": 1}",11573,128,156,26,0.4719
+kube-fake,none,68,0,,,"{""node_down"": 1, ""pod_evicted"": 1, ""race_cancel"": 1}",{},313462,182,197,36,1.1573
+kube-fake,none,69,0,,,"{""node_down"": 1, ""observe_stale"": 1}",{},202472,157,180,29,0.5086
+kube-fake,none,70,0,,,"{""node_down"": 1}",{},151312,200,214,34,1.0106
+kube-fake,none,71,0,,,"{""api_errors"": 1, ""job_pending"": 1, ""store_outage"": 1, ""store_tx_fail"": 1}",{},179340,196,233,37,1.1884
+kube-fake,none,72,0,,,"{""node_down"": 1}",{},153129,106,123,24,0.4651
+kube-fake,none,73,0,,,"{""observe_down"": 1, ""race_cancel"": 1, ""zombie"": 1}",{},117414,125,141,28,0.6193
+kube-fake,none,74,0,,,"{""race_cancel"": 1}",{},160238,162,178,36,0.9101
+kube-fake,none,75,0,,,"{""observe_stale"": 1}",{},168375,92,109,20,0.2893
+kube-fake,none,76,0,,,"{""job_pending"": 1, ""observe_stale"": 1, ""zombie"": 3}",{},46814,132,108,27,0.5028
+kube-fake,none,77,0,,,"{""api_errors"": 1, ""crash"": 2, ""pod_evicted"": 1, ""preempt"": 1, ""store_outage"": 1}","{""ended.before_forget"": 2}",157618,122,151,24,0.2524
+kube-fake,none,78,0,,,"{""crash"": 2, ""job_pending"": 1, ""node_down"": 1, ""preempt"": 1}","{""requeue.before_commit"": 1, ""start.after_commit"": 1}",179072,163,173,23,0.7371
+kube-fake,none,79,0,,,"{""job_pending"": 1, ""policy_fault"": 1}",{},129423,106,124,21,0.3352
+kube-fake,none,80,0,,,"{""observe_down"": 1, ""race_cancel"": 3, ""store_outage"": 1}",{},89388,158,193,32,1.025
+kube-fake,none,81,0,,,"{""pod_evicted"": 1, ""store_tx_fail"": 1}",{},151785,202,222,34,0.9862
+kube-fake,none,82,0,,,"{""crash"": 1, ""pod_evicted"": 1, ""store_outage"": 2}","{""submit.after_commit"": 1}",260330,124,153,25,0.4191
+kube-fake,none,83,0,,,"{""pod_evicted"": 1, ""race_cancel"": 1}",{},146480,188,215,38,0.6554
+kube-fake,none,84,0,,,"{""crash"": 1, ""preempt"": 1, ""race_cancel"": 1}","{""submit.after_commit"": 1}",134770,154,167,32,0.4832
+kube-fake,none,85,0,,,"{""observe_stale"": 1, ""pod_evicted"": 1, ""store_tx_fail"": 1}",{},106782,99,120,21,0.3076
+kube-fake,none,86,0,,,"{""crash"": 1, ""race_cancel"": 1, ""store_outage"": 1, ""store_tx_fail"": 1, ""zombie"": 1}","{""requeue.before_commit"": 1}",162440,229,245,44,1.0404
+kube-fake,none,87,0,,,"{""pod_evicted"": 1}",{},133056,114,125,22,0.5189
+kube-fake,none,88,0,,,"{""api_errors"": 1, ""job_pending"": 2, ""race_cancel"": 2}",{},87085,196,205,37,1.0034
+kube-fake,none,89,0,,,"{""crash"": 2, ""observe_stale"": 1, ""pod_evicted"": 1, ""race_cancel"": 1}","{""start.after_commit"": 1, ""stop.before_call"": 1}",125533,186,210,36,1.0057
+kube-fake,none,90,0,,,"{""observe_stale"": 1, ""policy_fault"": 1, ""preempt"": 1}",{},123174,170,194,34,0.7818
+kube-fake,none,91,0,,,"{""cap_change"": 1}",{},50109,172,175,35,0.5567
+kube-fake,none,92,0,,,"{""crash"": 2, ""preempt"": 1, ""race_cancel"": 1, ""zombie"": 1}","{""ended.before_forget"": 2}",239560,207,184,43,0.7955
+kube-fake,none,93,0,,,"{""crash"": 2, ""race_cancel"": 2, ""store_outage"": 1}","{""ended.before_forget"": 2}",6721,140,166,30,0.8095
+kube-fake,none,94,0,,,"{""crash"": 1, ""job_pending"": 1, ""observe_stale"": 1, ""pod_evicted"": 1, ""race_cancel"": 1}","{""stopped.before_commit"": 1}",32938,173,203,31,0.6911
+kube-fake,none,95,0,,,"{""job_pending"": 1, ""observe_stale"": 1, ""pod_evicted"": 1, ""policy_fault"": 1, ""store_tx_fail"": 1}",{},185110,168,225,34,1.3679
+kube-fake,none,96,0,,,"{""job_pending"": 1, ""zombie"": 2}",{},91335,168,177,33,0.7512
+kube-fake,none,97,0,,,"{""zombie"": 1}",{},116179,150,166,28,0.4982
+kube-fake,none,98,0,,,"{""crash"": 1, ""pod_evicted"": 1, ""store_outage"": 1, ""zombie"": 2}","{""ended.before_forget"": 1}",53797,124,114,26,0.4391
+kube-fake,none,99,0,,,"{""crash"": 2}","{""start.after_commit"": 1, ""stop.before_call"": 1}",163478,224,237,37,1.0276
+kube-fake,none,100,0,,,"{""api_errors"": 1, ""cap_change"": 1, ""observe_stale"": 1, ""race_cancel"": 1}",{},67827,135,162,26,0.4499
+local,none,1,0,,,"{""race_cancel"": 2, ""store_tx_fail"": 1}",{},136791,192,152,32,0.4316
+local,none,2,0,,,"{""policy_fault"": 1, ""slow_start"": 1, ""start_fail"": 1, ""zombie"": 1}",{},88182,134,104,29,0.2513
+local,none,3,0,,,"{""attempt_crash"": 1, ""node_down"": 1, ""store_outage"": 1, ""zombie"": 2}",{},169212,317,183,44,0.5991
+local,none,4,0,,,"{""attempt_lost"": 1, ""stop_fail"": 1}",{},235074,230,167,35,0.5518
+local,none,5,0,,,"{""crash"": 1, ""slow_start"": 1}","{""submit.after_commit"": 1}",192541,106,101,23,0.2789
+local,none,6,0,,,"{""cap_change"": 1, ""policy_fault"": 1, ""race_cancel"": 1, ""slow_start"": 1}",{},161723,98,110,20,0.29
+local,none,7,0,,,"{""race_cancel"": 1}",{},116102,121,116,24,0.2724
+local,none,8,0,,,"{""crash"": 2, ""observe_down"": 1, ""store_outage"": 1, ""zombie"": 1}","{""requeue.before_commit"": 1, ""stop.before_call"": 1}",116491,134,116,27,0.3074
+local,none,9,0,,,"{""cap_change"": 1, ""observe_down"": 2, ""observe_stale"": 1, ""race_cancel"": 1}",{},41665,109,103,21,0.224
+local,none,10,0,,,"{""policy_fault"": 1, ""store_tx_fail"": 1, ""zombie"": 1}",{},8147,120,111,27,0.3088
+local,none,11,0,,,"{""attempt_crash"": 1, ""policy_fault"": 1, ""preempt"": 1, ""race_cancel"": 1}",{},93853,143,134,31,0.4669
+local,none,12,0,,,"{""stop_fail"": 1}",{},104150,188,159,40,0.6315
+local,none,13,0,,,"{""attempt_lost"": 1, ""crash"": 1, ""policy_fault"": 1}","{""ended.before_forget"": 1}",274811,204,184,37,0.5991
+local,none,14,0,,,"{""observe_stale"": 1, ""policy_fault"": 1}",{},47028,148,137,28,0.3351
+local,none,15,0,,,"{""stop_fail"": 1, ""store_tx_fail"": 1}",{},89817,168,148,38,0.7353
+local,none,16,0,,,"{""race_cancel"": 1}",{},93717,92,81,23,0.131
+local,none,17,0,,,"{""node_down"": 1, ""race_cancel"": 1, ""store_outage"": 1, ""store_tx_fail"": 1}",{},71770,150,163,29,0.2797
+local,none,18,0,,,"{""observe_stale"": 1, ""zombie"": 3}",{},51855,150,109,35,0.1939
+local,none,19,0,,,"{""stop_fail"": 1}",{},76050,96,91,20,0.235
+local,none,20,0,,,"{""crash"": 1, ""store_outage"": 1}","{""ended.before_forget"": 1}",69838,126,115,21,0.2944
+local,none,21,0,,,"{""attempt_crash"": 1, ""node_down"": 1, ""slow_start"": 1}",{},150074,202,179,39,0.5381
+local,none,22,0,,,"{""observe_stale"": 1, ""policy_fault"": 1, ""stop_fail"": 1}",{},119835,140,127,28,0.3493
+local,none,23,0,,,"{""crash"": 1, ""race_cancel"": 1, ""slow_start"": 1}","{""ended.before_forget"": 1}",12714,142,122,27,0.1785
+local,none,24,0,,,"{""observe_stale"": 1, ""race_cancel"": 1}",{},158587,206,180,40,0.6027
+local,none,25,0,,,"{""attempt_lost"": 1, ""observe_down"": 1, ""zombie"": 1}",{},170282,216,151,36,0.6835
+local,none,26,0,,,"{""observe_stale"": 1}",{},137876,164,151,33,0.7478
+local,none,27,0,,,"{""store_tx_fail"": 1}",{},238436,182,168,36,0.5073
+local,none,28,0,,,"{""slow_start"": 1, ""zombie"": 1}",{},83431,150,130,29,0.3759
+local,none,29,0,,,"{""race_cancel"": 1}",{},112635,136,114,26,0.2318
+local,none,30,0,,,"{""attempt_crash"": 1, ""cap_change"": 1, ""crash"": 1}","{""ended.before_forget"": 1}",81186,138,113,26,0.3323
+local,none,31,0,,,"{""attempt_lost"": 1, ""observe_down"": 1, ""store_outage"": 1}",{},72058,108,110,22,0.2702
+local,none,32,0,,,"{""attempt_crash"": 1, ""attempt_lost"": 1, ""node_down"": 1, ""observe_down"": 1, ""observe_stale"": 1}",{},79157,235,194,36,0.7438
+local,none,33,0,,,"{""observe_stale"": 1, ""preempt"": 1, ""race_cancel"": 1, ""store_outage"": 2}",{},140964,138,142,25,0.4612
+local,none,34,0,,,"{""node_down"": 1, ""observe_stale"": 1, ""slow_start"": 1, ""zombie"": 1}",{},114791,149,115,31,0.2805
+local,none,35,0,,,"{""store_outage"": 1, ""zombie"": 1}",{},201265,238,208,39,0.8816
+local,none,36,0,,,"{""cap_change"": 1, ""observe_stale"": 2, ""start_fail"": 1, ""store_outage"": 1, ""zombie"": 1}",{},76515,108,100,24,0.1744
+local,none,37,0,,,"{""cap_change"": 1, ""policy_fault"": 2, ""stop_fail"": 1, ""store_tx_fail"": 1}",{},199527,176,166,31,0.6153
+local,none,38,0,,,"{""crash"": 1, ""race_cancel"": 1, ""store_outage"": 1}","{""submit.after_commit"": 1}",111532,112,114,25,0.3031
+local,none,39,0,,,"{""attempt_lost"": 1, ""observe_stale"": 1, ""race_cancel"": 1, ""store_outage"": 1, ""store_tx_fail"": 1, ""zombie"": 1}",{},282981,222,196,40,0.7987
+local,none,40,0,,,"{""stop_fail"": 1}",{},152965,116,96,24,0.3659
+local,none,41,0,,,"{""store_outage"": 1}",{},188873,152,139,33,0.6809
+local,none,42,0,,,"{""attempt_crash"": 1, ""attempt_lost"": 1, ""cap_change"": 1, ""observe_stale"": 1, ""policy_fault"": 1, ""start_fail"": 1}",{},0,140,132,30,0.5006
+local,none,43,0,,,"{""attempt_crash"": 1, ""observe_stale"": 1, ""start_fail"": 2, ""store_tx_fail"": 1}",{},58271,150,148,28,0.5026
+local,none,44,0,,,"{""node_down"": 1, ""observe_stale"": 1, ""start_fail"": 2, ""store_outage"": 1, ""zombie"": 1}",{},64735,191,177,41,0.6347
+local,none,45,0,,,"{""cap_change"": 1, ""crash"": 1}","{""ended.before_forget"": 1}",142298,174,128,38,0.3715
+local,none,46,0,,,"{""attempt_crash"": 1, ""cap_change"": 1, ""race_cancel"": 1, ""store_outage"": 1}",{},0,104,108,21,0.4467
+local,none,47,0,,,"{""attempt_crash"": 1, ""start_fail"": 1}",{},190101,118,101,24,0.2797
+local,none,48,0,,,"{""observe_down"": 1, ""observe_stale"": 1, ""preempt"": 1}",{},119382,190,172,35,0.5727
+local,none,49,0,,,"{""attempt_crash"": 1, ""attempt_lost"": 1, ""observe_stale"": 1}",{},166866,118,110,20,0.2131
+local,none,50,0,,,"{""cap_change"": 1, ""crash"": 1, ""start_fail"": 1, ""store_outage"": 1}","{""submit.after_commit"": 1}",59673,130,126,26,0.3662
+local,none,51,0,,,"{""preempt"": 1}",{},357767,220,159,33,0.7099
+local,none,52,0,,,"{""attempt_lost"": 1}",{},149853,220,184,40,0.4468
+local,none,53,0,,,"{""node_down"": 1, ""stop_fail"": 1, ""zombie"": 1}",{},91033,189,146,38,0.5296
+local,none,54,0,,,"{""attempt_crash"": 1, ""attempt_lost"": 1, ""observe_down"": 1, ""policy_fault"": 1, ""race_cancel"": 2}",{},71637,112,107,23,0.2683
+local,none,55,0,,,"{""attempt_crash"": 1, ""race_cancel"": 1}",{},137041,100,93,22,0.2126
+local,none,56,0,,,"{""observe_stale"": 2, ""start_fail"": 1}",{},79586,184,166,38,0.4293
+local,none,57,0,,,"{""attempt_lost"": 1, ""observe_stale"": 1, ""store_outage"": 1}",{},166793,208,206,38,1.0048
+local,none,58,0,,,"{""attempt_crash"": 1}",{},115632,178,155,35,0.4605
+local,none,59,0,,,"{""race_cancel"": 1, ""stop_fail"": 1}",{},202838,134,129,27,0.5206
+local,none,60,0,,,"{""observe_down"": 1, ""race_cancel"": 1, ""stop_fail"": 1}",{},118629,123,114,28,0.3628
+local,none,61,0,,,"{""race_cancel"": 1}",{},134432,177,164,34,0.6143
+local,none,62,0,,,"{""crash"": 1, ""observe_down"": 1, ""store_outage"": 1}","{""submit.after_commit"": 1}",189881,140,132,27,0.2889
+local,none,63,0,,,"{""attempt_crash"": 1}",{},81731,120,103,24,0.5023
+local,none,64,0,,,"{""node_down"": 1, ""race_cancel"": 1}",{},136009,211,183,32,0.74
+local,none,65,0,,,"{""zombie"": 1}",{},134495,142,124,30,0.4507
+local,none,66,0,,,{},{},201167,162,143,33,0.4655
+local,none,67,0,,,"{""attempt_lost"": 1, ""crash"": 1, ""store_tx_fail"": 2, ""zombie"": 1}","{""start.after_call"": 1}",139746,140,120,29,0.4138
+local,none,68,0,,,"{""attempt_crash"": 1, ""attempt_lost"": 1, ""stop_fail"": 1}",{},291929,180,152,36,0.5419
+local,none,69,0,,,"{""attempt_crash"": 1, ""node_down"": 1}",{},263568,182,143,29,0.6512
+local,none,70,0,,,"{""attempt_crash"": 1}",{},151312,178,151,34,0.6147
+local,none,71,0,,,"{""policy_fault"": 1, ""race_cancel"": 1, ""stop_fail"": 1, ""zombie"": 1}",{},148066,234,164,39,0.583
+local,none,72,0,,,"{""attempt_lost"": 1}",{},153129,106,94,24,0.2455
+local,none,73,0,,,"{""observe_down"": 1, ""race_cancel"": 1, ""zombie"": 1}",{},117414,125,114,28,0.4125
+local,none,74,0,,,"{""race_cancel"": 1}",{},160238,164,154,36,0.4372
+local,none,75,0,,,"{""node_down"": 1}",{},168375,98,87,20,0.1333
+local,none,76,0,,,"{""cap_change"": 1, ""crash"": 1, ""node_down"": 1, ""stop_fail"": 1, ""zombie"": 2}","{""start.after_call"": 1}",162,125,95,25,0.4281
+local,none,77,0,,,"{""attempt_crash"": 2, ""observe_stale"": 1, ""preempt"": 1, ""race_cancel"": 1, ""stop_fail"": 1}",{},157618,130,119,24,0.3303
+local,none,78,0,,,"{""attempt_lost"": 2, ""crash"": 1, ""observe_down"": 1, ""preempt"": 1}","{""start.after_commit"": 1}",167957,146,129,23,0.1926
+local,none,79,0,,,"{""policy_fault"": 1, ""start_fail"": 1}",{},126594,106,98,21,0.2737
+local,none,80,0,,,"{""node_down"": 1, ""policy_fault"": 1, ""stop_fail"": 1, ""zombie"": 2}",{},267975,243,148,40,0.7063
+local,none,81,0,,,"{""start_fail"": 1, ""store_outage"": 1}",{},154868,202,184,34,0.5558
+local,none,82,0,,,"{""attempt_lost"": 1, ""crash"": 1, ""observe_down"": 2}","{""submit.after_commit"": 1}",236145,124,117,25,0.2406
+local,none,83,0,,,"{""attempt_lost"": 1, ""policy_fault"": 1}",{},122054,186,172,38,0.5938
+local,none,84,0,,,"{""crash"": 1, ""preempt"": 1, ""race_cancel"": 1}","{""submit.after_commit"": 1}",223544,1159,298,32,1.9323
+local,none,85,0,,,"{""attempt_lost"": 1, ""observe_stale"": 1, ""store_outage"": 1}",{},106782,96,99,21,0.2379
+local,none,86,0,,,"{""crash"": 1, ""observe_down"": 1, ""race_cancel"": 1, ""store_tx_fail"": 1, ""zombie"": 1}","{""requeue.before_commit"": 1}",185266,234,192,44,1.0766
+local,none,87,0,,,"{""start_fail"": 1}",{},195048,118,100,22,0.2898
+local,none,88,0,,,"{""cap_change"": 1, ""observe_stale"": 1, ""policy_fault"": 2, ""race_cancel"": 1, ""stop_fail"": 1}",{},107464,180,155,37,0.3133
+local,none,89,0,,,"{""crash"": 2, ""race_cancel"": 1, ""start_fail"": 1, ""stop_fail"": 1}","{""start.after_commit"": 1, ""stop.before_call"": 1}",147314,182,167,36,0.7491
+local,none,90,0,,,"{""node_down"": 1, ""policy_fault"": 1, ""preempt"": 1}",{},248448,177,163,34,0.7597
+local,none,91,0,,,"{""observe_stale"": 1}",{},127104,176,164,35,0.4883
+local,none,92,0,,,"{""crash"": 2, ""preempt"": 1, ""race_cancel"": 1, ""zombie"": 1}","{""ended.before_forget"": 2}",232701,208,160,43,0.7583
+local,none,93,0,,,"{""crash"": 2, ""race_cancel"": 2, ""store_outage"": 1, ""zombie"": 1}","{""ended.before_forget"": 1, ""submit.after_commit"": 1}",82898,144,134,31,0.3955
+local,none,94,0,,,"{""attempt_lost"": 2, ""observe_stale"": 2, ""policy_fault"": 1}",{},81478,180,164,31,0.6213
+local,none,95,0,,,"{""attempt_lost"": 1, ""node_down"": 1, ""slow_start"": 1, ""start_fail"": 1, ""store_outage"": 1}",{},185110,168,169,34,0.6647
+local,none,96,0,,,"{""store_tx_fail"": 1, ""zombie"": 2}",{},91335,168,143,34,0.6574
+local,none,97,0,,,"{""zombie"": 1}",{},116179,150,129,28,0.4486
+local,none,98,0,,,"{""attempt_lost"": 1, ""node_down"": 1, ""start_fail"": 1, ""zombie"": 2}",{},185455,140,93,26,0.5542
+local,none,99,0,,,"{""crash"": 2}","{""start.after_commit"": 1, ""stop.before_call"": 1}",218652,244,188,37,0.805
+local,none,100,0,,,"{""crash"": 1, ""node_down"": 1, ""policy_fault"": 1, ""race_cancel"": 1}","{""ended.before_forget"": 1}",57613,140,132,26,0.3602

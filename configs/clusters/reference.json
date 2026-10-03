@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "name": "reference",
+  "classes": [{"name": "a100", "speed": 1.0}],
+  "node_groups": [
+    {"count": 2, "prefix": "r0-n", "rack": "r0", "class": "a100", "gpus": 8, "cpus": 128, "mem_gb": 1024},
+    {"count": 2, "prefix": "r1-n", "rack": "r1", "class": "a100", "gpus": 8, "cpus": 128, "mem_gb": 1024}
+  ],
+  "cross_node_factor": 1.1,
+  "cross_rack_factor": 1.25,
+  "restart_overhead_s": 120,
+  "preempt_grace_s": 0,
+  "sources": {
+    "node": "assumed (TASK reference system): 8 GPUs, 128 CPUs, 1024 GB per node, the DGX A100 shape used by gpu-cluster-scheduler",
+    "speed": "a100 is the reference class (speed 1.0)",
+    "cross_node_factor": "assumed, as in gpu-cluster-scheduler",
+    "cross_rack_factor": "assumed, as in gpu-cluster-scheduler",
+    "restart_overhead_s": "assumed; unused before preemption (not implemented)"
+  }
+}

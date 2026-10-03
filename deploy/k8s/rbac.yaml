@@ -1,0 +1,57 @@
+# Least privilege: Jobs and pods in the workload namespace; nodes read-only (cluster-scoped, so a ClusterRole).
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: awp-controller
+  namespace: awp-system
+  labels:
+    app.kubernetes.io/name: ai-workload-platform
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: awp-workloads
+  namespace: awp-workloads
+rules:
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get", "list", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: awp-workloads
+  namespace: awp-workloads
+subjects:
+  - kind: ServiceAccount
+    name: awp-controller
+    namespace: awp-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: awp-workloads
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: awp-nodes-readonly
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: awp-nodes-readonly
+subjects:
+  - kind: ServiceAccount
+    name: awp-controller
+    namespace: awp-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: awp-nodes-readonly

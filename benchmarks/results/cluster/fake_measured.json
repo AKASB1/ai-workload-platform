@@ -1,0 +1,44 @@
+{
+  "note": "simulated; virtual clock; Kubernetes backend on the fake client; 2000 workloads",
+  "measured_admit_to_running_ms_median_kind_pinned": 973.9,
+  "runs": [
+    {
+      "latencies": "assumed defaults",
+      "schedule_ms": 50,
+      "container_start_ms": 1000,
+      "delete_ms": 2000,
+      "workloads": 2000,
+      "events": 8000,
+      "wall_s": 19.47,
+      "events_per_wall_s": 411,
+      "makespan_s": 266488.571,
+      "wait_mean": 3362.99418125,
+      "wait_p95": 7652.3,
+      "utilization": 0.7546423937744857,
+      "running_over_allocated": 0.9989427591196607,
+      "admit_to_running_ms_mean": 1050.0,
+      "terminal_states": {
+        "SUCCEEDED": 2000
+      }
+    },
+    {
+      "latencies": "measured on kind",
+      "schedule_ms": 50,
+      "container_start_ms": 923,
+      "delete_ms": 2000,
+      "workloads": 2000,
+      "events": 8000,
+      "wall_s": 27.59,
+      "events_per_wall_s": 290,
+      "makespan_s": 266480.717,
+      "wait_mean": 3360.61811375,
+      "wait_p95": 7646.371,
+      "utilization": 0.7546022693502137,
+      "running_over_allocated": 0.9990202141537777,
+      "admit_to_running_ms_mean": 973.0,
+      "terminal_states": {
+        "SUCCEEDED": 2000
+      }
+    }
+  ]
+}
