@@ -1,8 +1,8 @@
 # Architecture
 
-A control plane for AI workloads on shared GPU compute that keeps its state correct when its parts fail. The GPUs are **simulated**: workloads sleep for their run time; nothing runs a model. Formats and definitions are in `docs/contracts.md`; the Kubernetes mapping is in `docs/kubernetes.md`; the fault harness is in `docs/failure-injection.md`.
+A control plane for AI workloads on shared GPU compute that keeps its state correct when its parts fail. Workloads sleep for their run time on simulated GPUs. Formats and definitions are in `docs/contracts.md`, the Kubernetes mapping is in `docs/kubernetes.md`, and the fault harness is in `docs/failure-injection.md`.
 
-![framework](figures/framework.png)
+![Architecture of the control plane](figures/architecture.svg)
 
 ## Modules and boundaries
 
@@ -28,9 +28,9 @@ src/ai_workload_platform/
   sim.py                assemble an in-process platform on the virtual clock
 ```
 
-Dependency direction: `api` and `bench` use everything below them; `controller` uses `store`, `policy`, `scheduler`; `store/ops` uses `lifecycle`; the domain code (`models`, `lifecycle`, `admission`, the policy interface and built-ins, `controller/rules.py`, `observability/evaluation.py`) imports no web framework and no database driver and never reads the wall clock — it receives `now_ms` or a `Clock` and works on the store interface.
+Dependency direction: `api` and `bench` use everything below them; `controller` uses `store`, `policy`, `scheduler`; `store/ops` uses `lifecycle`. The domain code (`models`, `lifecycle`, `admission`, the policy interface and built-ins, `controller/rules.py`, `observability/evaluation.py`) imports no web framework and no database driver. It never reads the wall clock: it receives `now_ms` or a `Clock` and works on the store interface.
 
-The scaffold's `SchedulerAdapter` (submit / cancel / status) mixed two things that are now separate interfaces: the **policy** (`Policy.schedule(view) -> decision`: who starts where) and the **backend** (`SchedulerAdapter`: `inventory`, `start`, `stop`, `observe`, `forget`: execute and observe).
+The scaffold's `SchedulerAdapter` (submit / cancel / status) mixed two things that are now separate interfaces. The **policy** (`Policy.schedule(view) -> decision`) decides who starts where. The **backend** (`SchedulerAdapter`: `inventory`, `start`, `stop`, `observe`, `forget`) executes and observes.
 
 ## The control loop
 
@@ -39,19 +39,19 @@ The scaffold's `SchedulerAdapter` (submit / cancel / status) mixed two things th
 1. **Lease.** Acquire or renew the lease row (`holder`, `epoch`, `expires_ms`). A controller that finds another live holder is a standby; one whose epoch was superseded raises `LeaseLost` and stops. Every later write of the tick checks holder and epoch inside its own transaction (fencing), and every event it writes records the epoch.
 2. **Inventory.** `backend.inventory()`; the controller stores the snapshot (and since when each node has been not ready).
 3. **Observe.** `backend.observe()`: a complete snapshot of every attempt the backend knows.
-4. **Rules** in the order R6, R5, R4, R3, R2, R1, R8, R7 (`docs/contracts.md` §8), on a fresh read of the store. Each repair is one transaction with compare and set on the rows it decided on; a `VersionConflict` means re-read and re-decide on the next tick (the controller then asks to be woken at once).
-5. **Scheduling cycle** (only with a fresh inventory and snapshot): build the view from the store's books and the inventory, call the policy (through `PolicyRunner`), validate the decision all or nothing, commit one `started` event per action (write-ahead), then call `backend.start`.
+4. **Rules** in the order R6, R5, R4, R3, R2, R1, R8, R7 (`docs/contracts.md` §8), on a fresh read of the store. Each repair is one transaction with compare and set on the rows it decided on. A `VersionConflict` means re-read and re-decide on the next tick, and the controller then asks to be woken at once.
+5. **Scheduling cycle** (only with a fresh inventory and snapshot): build the view from the store's books and the inventory, and call the policy (through `PolicyRunner`). Validate the decision all or nothing, commit one `started` event per action (write-ahead), then call `backend.start`.
 
-A failing `inventory()` or `observe()` skips the rules that need it and the scheduling cycle (R7, the retry release, still runs); a store error ends the tick and the next one starts from the store again.
+A failing `inventory()` or `observe()` skips the rules that need it and the scheduling cycle; R7, the retry release, still runs. A store error ends the tick, and the next one starts from the store again.
 
 ## Two drivers
 
-- **Virtual** (`VirtualDriver`; simulations, the harness, the benchmarks): ticks once at time 0 so an inventory is stored, then jumps the clock to the earliest of the controller's next deadline (retry times, timeouts, grace periods, and a poll every `observe_interval_ms` while a start is in flight), the backend's next internal event, and the next client action. It never polls an idle system. At one instant: completions (observed in the tick), then submissions (applied between the rules and the cycle through the same admission function the API calls), then one scheduling cycle. A crash at a crash point restarts a new controller object over the same store and backend.
-- **Live** (`LiveDriver`, asyncio, inside the FastAPI lifespan): the tick runs in a worker thread so the event loop is never blocked; it ticks at least every `observe_interval_ms` (wall clock), earlier when a deadline or a backend event is due or when the API kicks it after a submission or a cancel. The clock is the system clock, optionally scaled (`--scale`), with its origin stored in the store so a restarted service continues the same timeline. On `LeaseLost` the driver discards the controller and starts a fresh one (a standby until it can take the lease).
+- **Virtual** (`VirtualDriver`; simulations, the harness, the benchmarks): ticks once at time 0 so an inventory is stored. Then it jumps the clock to the earliest of three times: the controller's next deadline, the backend's next internal event, and the next client action. The deadlines are retry times, timeouts, grace periods, and a poll every `observe_interval_ms` while a start is in flight. It never polls an idle system. Within one instant the order is completions (observed in the tick), then submissions, then one scheduling cycle. Submissions are applied between the rules and the cycle, through the same admission function the API calls. A crash at a crash point restarts a new controller object over the same store and backend.
+- **Live** (`LiveDriver`, asyncio, inside the FastAPI lifespan): the tick runs in a worker thread so the event loop is never blocked. It ticks at least every `observe_interval_ms` (wall clock). It ticks earlier when a deadline or a backend event is due, or when the API kicks it after a submission or a cancel. The clock is the system clock, optionally scaled (`--scale`), with its origin stored in the store so a restarted service continues the same timeline. On `LeaseLost` the driver discards the controller and starts a fresh one (a standby until it can take the lease).
 
 ## The store and its guarantees
 
-- The store is the only source of truth; controllers and the API keep only caches (and memory that a fresh controller may lose: the last start and stop calls, the last snapshot that showed an attempt).
+- The store is the only source of truth. Controllers and the API keep only caches and memory that a fresh controller may lose: the last start and stop calls, and the last snapshot that showed an attempt.
 - Every mutation is one transaction that checks the expected version of the row(s) it changes, bumps it, and appends exactly one event with the next gap-free `seq`. Writers are serialized (SQLite `BEGIN IMMEDIATE` with WAL and a busy timeout; PostgreSQL a transaction-level advisory lock), and the event time never decreases.
 - The event log is complete: `store/replay.py` (written independently of the write path) rebuilds the workloads and attempts tables and the books from it exactly.
 - Write-ahead: `started` is committed before the backend is called; a crash in between leaves a `STARTING` attempt that R1 repeats.
@@ -72,7 +72,7 @@ A failing `inventory()` or `observe()` skips the rules that need it and the sche
 | policy failure (invalid, error, timeout, crash, malformed) | `PolicyRunner` | counted; after 3 in a row `fifo+first_fit` decides; retries at `min(60 s, 1 s · 2^j)` |
 | stale or unavailable snapshots | backend contract, assumption A1 | rules that need a snapshot are skipped; R5 counts its grace from the last snapshot that showed the attempt |
 
-What is assumed rather than handled: snapshots are complete and at most `lost_grace_ms / 3` old (A1); the store is durable; one controller is active per store (the lease); the clock of one service does not go back.
+What is assumed rather than handled: snapshots are complete and at most `lost_grace_ms / 3` old (A1); the store is durable; one controller is active per store (the lease); and the clock of one service does not go back.
 
 ## Deployment shapes
 

@@ -48,5 +48,5 @@ def setup() -> None:
 
 
 def save(fig: plt.Figure, path: str) -> None:
-    fig.savefig(path, dpi=DPI, bbox_inches="tight")
+    fig.savefig(path, dpi=DPI, bbox_inches="tight", metadata={"Software": None})  # no tool version in the PNG
     plt.close(fig)

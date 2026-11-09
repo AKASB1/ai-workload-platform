@@ -1,0 +1,52 @@
+vars: {
+  d2-config: {
+    sketch: true
+    layout-engine: elk
+    pad: 24
+  }
+}
+classes: {
+  comp: {style: {fill: "#DCEBFA"; stroke: "#2563A8"; stroke-width: 2; font-size: 20; font-color: "#1F2328"; border-radius: 6}}
+  ext: {style: {fill: "#FFFFFF"; stroke: "#57606A"; stroke-width: 2; font-size: 20; font-color: "#1F2328"}}
+  store: {shape: cylinder; style: {fill: "#FFFFFF"; stroke: "#2563A8"; stroke-width: 2; font-size: 20; font-color: "#1F2328"}}
+  area: {style: {fill: "#F5F9FE"; stroke: "#2563A8"; stroke-width: 2; font-size: 22; font-color: "#1F2328"; bold: true}}
+  flow: {style: {stroke: "#424A53"; stroke-width: 2; font-size: 18; font-color: "#1F2328"}}
+}
+direction: down
+
+clients: "clients\nCLI · Client · replay" {class: ext}
+harness: "fault harness,\nevaluation\nfaults/ · bench/" {class: comp}
+
+api: "HTTP API v1 (api/)\nadmission/" {class: comp}
+store: "Store (store/)\nSQLite · PostgreSQL\nversioned rows\nevent log · lease" {class: store}
+
+controller: "controller/" {
+  class: area
+  label.near: top-left
+  virtual: "VirtualDriver\nvirtual clock" {class: comp}
+  live: "LiveDriver\nasyncio" {class: comp}
+  tick: "Controller.tick\nlease · inventory\nobserve · rules R1–R9\nscheduling cycle" {class: comp}
+}
+
+policy: "policy/\nPolicyRunner\nthree built-ins\nExternalPolicy" {class: comp}
+
+backends: "scheduler/ (SchedulerAdapter)" {
+  class: area
+  local: "LocalBackend\ninjected clock" {class: comp}
+  kube: "KubeBackend\nIndexed Jobs" {class: comp}
+  local -> kube: {style.opacity: 0}
+}
+
+kind: "kind cluster\nadvertised GPUs" {class: ext}
+fake: "FakeKubeClient\nvirtual clock" {class: comp}
+
+clients -> api: HTTP {class: flow}
+api -> store: "one transaction\n+ one event" {class: flow}
+harness -> controller.virtual: "virtual time,\nfaults" {class: flow}
+controller.virtual -> controller.tick: tick {class: flow}
+controller.live -> controller.tick: tick {class: flow}
+controller.tick <-> store: "fenced\nCAS writes" {class: flow}
+controller.tick <-> policy: "view,\ndecision" {class: flow}
+controller.tick -> backends: "inventory\nstart · stop\nobserve · forget" {class: flow}
+backends.kube -> kind {class: flow}
+backends.kube -> fake {class: flow}

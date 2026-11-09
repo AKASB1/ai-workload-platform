@@ -1,8 +1,8 @@
 """Result figures and the result table from the committed results.
 
 Reads benchmarks/results/<suite>/ (and benchmarks/results/cluster/ when present) and writes
-docs/figures/e1_convergence.png, e1_faults.png, e2_backends.png, e3_policies.png, e3_quota.png, and
-benchmarks/results/<suite>/table.md. Usage: python scripts/plot_results.py [--suite full]
+docs/figures/e1_convergence.png, e1_faults.png, e2_backends.png, e3_policies.png, e3_quota.png,
+e3_preemption.png, the README version readme_e3_bsld.png, and benchmarks/results/<suite>/table.md. Usage: python scripts/plot_results.py [--suite full]
 """
 
 from __future__ import annotations
@@ -61,10 +61,11 @@ def e1_figures(d: Path, out: Path) -> dict:
             color=SERIES[i],
             label=f"{b} ({summ[b]['schedules']} schedules, {summ[b]['violating_schedules']} violations)",
         )
-    ax.set_xlabel("convergence time after the last fault (virtual s)")
-    ax.set_ylabel("share of schedules")
-    ax.set_title("E1: every schedule converges (simulated)")
-    ax.legend(loc="lower right")
+    ax.set_xlabel("convergence time after the last fault (virtual s)", fontsize=11)
+    ax.set_ylabel("share of schedules", fontsize=11)
+    ax.set_title("E1: every schedule converges (simulated)", fontsize=11)
+    ax.tick_params(labelsize=9.5)
+    ax.legend(loc="lower right", fontsize=9.5)
     save(fig, str(out / "e1_convergence.png"))
 
     kinds = sorted({k for b in ("local", "kube-fake") for k in summ[b]["faults_injected"]})
@@ -104,7 +105,9 @@ def e2_figure(d: Path, cluster: Path, out: Path) -> list[dict]:
             (f"kind {m}", [r for r in rc if r["mode"] == m], "median, min–max, 3 runs, seed 1")
             for m in ("pinned", "delegate")
         ]
-    fig, axes = plt.subplots(1, len(panels), figsize=(3.0 * len(panels), 3.4))
+    fig, grid = plt.subplots(2, 3, figsize=(8.0, 6.4))
+    axes = list(grid.ravel())
+    fig.delaxes(axes.pop())  # five panels on a 2 x 3 grid
     table = []
     for ax, (m, title) in zip(axes, panels, strict=True):
         for i, (name, rs, _how) in enumerate(groups):
@@ -177,7 +180,8 @@ def e3_figures(d: Path, out: Path) -> list[dict]:
         return None, None
 
     def panel_fig(metrics: list[tuple[str, str]], name: str, title: str) -> None:
-        fig, axes = plt.subplots(1, len(metrics), figsize=(3.6 * len(metrics), 3.6))
+        fig, grid = plt.subplots(2, 2, figsize=(8.0, 6.8))
+        axes = list(grid.ravel())
         w = 0.8 / len(POLICIES)
         for ax, (m, mt) in zip(axes, metrics, strict=True):
             for i, p in enumerate(POLICIES):
@@ -199,12 +203,27 @@ def e3_figures(d: Path, out: Path) -> list[dict]:
                     capsize=2,
                     label=POLICY_LABEL[p],
                 )
-            ax.set_xticks(range(len(keys)), [f"{v}\n{ld:g}" for v, ld in keys], fontsize=8)
+            # loads as tick labels, each variant name once under its pair of loads
+            ax.set_xticks(range(len(keys)), [f"{ld:g}" for _v, ld in keys], fontsize=8.5)
+            for v in dict.fromkeys(k[0] for k in keys):
+                js = [j for j, k in enumerate(keys) if k[0] == v]
+                ax.annotate(
+                    v,
+                    xy=(sum(js) / len(js), 0),
+                    xycoords=("data", "axes fraction"),
+                    xytext=(0, -19),
+                    textcoords="offset points",
+                    ha="center",
+                    va="top",
+                    fontsize=8.5,
+                    color=INK2,
+                )
             ax.set_title(mt, fontsize=9.5)
             ax.grid(axis="x", visible=False)
-        axes[0].legend(loc="upper left", fontsize=7.5)
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(handles, labels, loc="lower center", ncol=len(POLICIES), fontsize=8.5)
         fig.suptitle(title, fontsize=10.5)
-        fig.tight_layout()
+        fig.tight_layout(rect=(0, 0.05, 1, 1))
         save(fig, str(out / name))
 
     panel_fig(
@@ -230,6 +249,50 @@ def e3_figures(d: Path, out: Path) -> list[dict]:
     return agg
 
 
+def readme_e3_figure(d: Path, out: Path) -> None:
+    """README version of the E3 figure: P95 bounded slowdown only (the metric of the paired comparison), at README
+    font sizes. The four-metric figure stays e3_policies.png."""
+    agg = rows(d / "e3_aggregate.csv")
+    keys = sorted(
+        {(r["variant"], float(r["load"])) for r in agg},
+        key=lambda k: (["balanced", "skew", "bursty"].index(k[0]), k[1]),
+    )
+    fig, ax = plt.subplots(figsize=(8.0, 4.4))
+    w = 0.8 / len(POLICIES)
+    for i, p in enumerate(POLICIES):
+        xs, ys, es = [], [], []
+        for j, (v, ld) in enumerate(keys):
+            r = next(
+                (
+                    r
+                    for r in agg
+                    if r["variant"] == v
+                    and float(r["load"]) == ld
+                    and r["policy"] == p
+                    and r["metric"] == "bsld_p95"
+                ),
+                None,
+            )
+            if r is None or num(r["mean"]) is None:
+                continue
+            xs.append(j + (i - (len(POLICIES) - 1) / 2) * w)
+            ys.append(num(r["mean"]))
+            es.append(num(r["ci95"]) or 0)
+        ax.bar(
+            xs, ys, width=w * 0.92, color=SERIES[i], yerr=es, ecolor=INK2, capsize=2, label=POLICY_LABEL[p]
+        )
+    ax.set_xticks(range(len(keys)), [f"{v}\n{ld:g}" for v, ld in keys], fontsize=9.5)
+    ax.tick_params(axis="y", labelsize=9.5)
+    ax.set_ylabel("P95 bounded slowdown", fontsize=11)
+    ax.set_xlabel("trace variant and offered load", fontsize=11)
+    ax.set_title("E3: P95 bounded slowdown per policy (simulated; mean ± 95% CI, 10 seeds)", fontsize=11)
+    ax.grid(axis="x", visible=False)
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, fontsize=9.5)
+    fig.tight_layout(rect=(0, 0.12, 1, 1))
+    save(fig, str(out / "readme_e3_bsld.png"))
+
+
 def e3p_figure(d: Path, out: Path) -> list[dict]:
     rs = rows(d / "e3_preemption.csv")
     if not rs:
@@ -239,7 +302,7 @@ def e3p_figure(d: Path, out: Path) -> list[dict]:
         key=lambda k: (["balanced", "skew", "bursty"].index(k[0]), k[1]),
     )
     pols = sorted({(r["base"], r["policy"]) for r in rs})
-    fig, axes = plt.subplots(1, 2, figsize=(10, 3.6))
+    fig, axes = plt.subplots(2, 1, figsize=(8.0, 6.8))
     for ax, (m, title) in zip(
         axes, [("bsld_p95", "P95 bounded slowdown"), ("slo_attainment", "SLO attainment")], strict=True
     ):
@@ -276,12 +339,13 @@ def e3p_figure(d: Path, out: Path) -> list[dict]:
                 capsize=2,
                 label=name,
             )
-        ax.set_xticks(range(len(keys)), [f"{v} {ld:g}" for v, ld in keys], fontsize=8)
+        ax.set_xticks(range(len(keys)), [f"{v} {ld:g}" for v, ld in keys], fontsize=8.5)
         ax.set_title(title, fontsize=9.5)
         ax.grid(axis="x", visible=False)
-    axes[0].legend(fontsize=7.5, loc="upper left")
-    fig.suptitle("Tier 2: preemption with checkpoints (simulated; mean ± 95% CI, 10 seeds)", fontsize=10.5)
-    fig.tight_layout()
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, fontsize=8.5)
+    fig.suptitle("Preemption with checkpoints (simulated; mean ± 95% CI, 10 seeds)", fontsize=10.5)
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
     save(fig, str(out / "e3_preemption.png"))
     return rs
 
@@ -419,6 +483,7 @@ def main() -> None:
     e1 = e1_figures(d, out)
     e2 = e2_figure(d, ROOT / "benchmarks" / "results" / "cluster", out)
     agg = e3_figures(d, out)
+    readme_e3_figure(d, out)
     e3p = e3p_figure(d, out)
     (d / "table.md").write_text(table_md(d, e1, e2, agg, e3p), encoding="utf-8", newline="\n")
     print("figures in", out, "table in", d / "table.md")

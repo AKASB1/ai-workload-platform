@@ -100,10 +100,9 @@
   "config_hash": "db59c10e778bdb62",
   "dirty": true,
   "hardware": {
-    "cpu": "Intel(R) Core(TM) i9-14900KF",
+    "cpu": "x86-64 desktop CPU",
     "logical_cpus": 32,
-    "os": "Windows-11",
-    "ram_gb": 96
+    "os": "Windows 11"
   },
   "load_note": "1 other agent run active (agent-runtime); 1 worker (sequential runs); CPU load sampled before E2 (c) 59.8 % (07:53)",
   "simulated": true,

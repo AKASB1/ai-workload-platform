@@ -1,0 +1,11 @@
+name: Question
+description: How something works or how to run it
+labels: [question]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What you want to know, and what you already read (README, docs, benchmarks/README.md).
+    validations:
+      required: true
